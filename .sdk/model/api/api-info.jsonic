@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://freepublicapis.com/api-error-handler"
+      }
+      description: "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls. It ensures that error messages are consistent and useful for end-users and developers alike."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://abhi-api.vercel.app"
+        }
+      ]
+      title: "API Error Handler"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

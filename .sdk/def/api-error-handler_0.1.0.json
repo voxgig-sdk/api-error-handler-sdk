@@ -1,0 +1,161 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Error Handler",
+    "description": "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls. It ensures that error messages are consistent and useful for end-users and developers alike.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://freepublicapis.com/api-error-handler"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://abhi-api.vercel.app",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/logo/glitch": {
+      "get": {
+        "summary": "Generate glitch logo with error handling",
+        "description": "Generates a glitch-style logo with the provided text. This endpoint demonstrates standardized error handling for various error scenarios.",
+        "operationId": "getGlitchLogo",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text to be displayed in the glitch logo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Hello World"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with generated logo",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid or missing text parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Bad Request",
+                  "message": "The 'text' parameter is required and cannot be empty",
+                  "status": 400
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "The requested resource could not be found",
+                  "status": 404
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Internal Server Error",
+                  "message": "An unexpected error occurred while processing your request",
+                  "status": 500
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Service Unavailable",
+                  "message": "The service is temporarily unavailable. Please try again later",
+                  "status": 503
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Logo Generation"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error type or name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error message explaining what went wrong"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the error occurred"
+          },
+          "path": {
+            "type": "string",
+            "description": "API endpoint path where the error occurred"
+          }
+        },
+        "required": [
+          "error",
+          "message",
+          "status"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Logo Generation",
+      "description": "Endpoints for generating logos with error handling capabilities"
+    }
+  ]
+}
