@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/api-error-handler-sdk/core"
+	"github.com/voxgig-sdk/api-error-handler-sdk/go/core"
 )
 
 type BaseFeature struct {
