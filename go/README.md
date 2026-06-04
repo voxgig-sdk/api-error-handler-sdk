@@ -28,16 +28,13 @@ package main
 
 import (
     "fmt"
-    "os"
 
     sdk "github.com/voxgig-sdk/api-error-handler-sdk/go"
     "github.com/voxgig-sdk/api-error-handler-sdk/go/core"
 )
 
 func main() {
-    client := sdk.NewApiErrorHandlerSDK(map[string]any{
-        "apikey": os.Getenv("API-ERROR-HANDLER_APIKEY"),
-    })
+    client := sdk.NewApiErrorHandlerSDK(map[string]any{})
 ```
 
 ### 3. Load a logogeneration
@@ -140,7 +137,6 @@ Create a `.env.local` file at the project root:
 
 ```
 API-ERROR-HANDLER_TEST_LIVE=TRUE
-API-ERROR-HANDLER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -162,7 +158,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `"apikey"` | `string` | API key for authentication. |
 | `"base"` | `string` | Base URL of the API server. |
 | `"prefix"` | `string` | URL path prefix prepended to all requests. |
 | `"suffix"` | `string` | URL path suffix appended to all requests. |

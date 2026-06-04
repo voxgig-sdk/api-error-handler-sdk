@@ -73,14 +73,12 @@ function logo_generation_direct_setup($mockres)
     $env = Runner::env_override([
         "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => [],
         "APIERRORHANDLER_TEST_LIVE" => "FALSE",
-        "APIERRORHANDLER_APIKEY" => "NONE",
     ]);
 
     $live = $env["APIERRORHANDLER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["APIERRORHANDLER_APIKEY"],
         ];
         $client = new ApiErrorHandlerSDK($merged_opts);
         return [

@@ -16,7 +16,17 @@
           }
         ],
         "title": "API Error Handler",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Standardised error-response helpers exposed alongside Abhi API's logo generators",
+        "homepage": "https://abhi-api.vercel.app",
+        "docs_url": "https://abhi-api.vercel.app/docs",
+        "license_short": "No licence stated by the provider.",
+        "license_md": "- The provider does not publish a licence or terms-of-use page.\n- Treat the service as an undocumented free public endpoint and do not rely on it for production use.\n- Attribution to Abhi API (https://abhi-api.vercel.app) is courteous when redistributing generated assets.",
+        "about_md": "API Error Handler is part of [Abhi API](https://abhi-api.vercel.app), a free public-API collection maintained by [Abhishek Suresh](https://github.com/AbhishekSuresh2) and hosted on Vercel. The catalogue groups dozens of small endpoints (anime images, downloaders, jokes, games, search proxies, logo makers, etc.) behind a single host.\n\nThe slug specifically surfaces the logo-generation family of endpoints, which return rendered text-effect images for a supplied `text` query parameter.\n\nKnown logo endpoints under `/api/logo/`:\n\n- `/api/logo/cyberMask?text=...`\n- `/api/logo/glitch?text=...`\n- `/api/logo/gold?text=...`\n- `/api/logo/leaves?text=...`\n- `/api/logo/matrix?text=...`\n- `/api/logo/neon?text=...`\n- `/api/logo/neonDream?text=...`\n- `/api/logo/retroWave?text=...`\n- `/api/logo/shadow?text=...`\n\nOperational notes: the service is hosted on Vercel at `https://abhi-api.vercel.app`. CORS is reported as disabled on the freepublicapis.com catalogue entry, so calls are best made server-side. No authentication, rate limits, or formal SLA are documented.",
+        "entity_desc": {
+          "logo_generation": "Text-effect logo image generator endpoints under `/api/logo/{style}` (e.g. `glitch`, `neon`, `matrix`, `gold`, `cyberMask`, `leaves`, `neonDream`, `retroWave`, `shadow`), each accepting a `text` query parameter."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +34,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "logo_generation": {

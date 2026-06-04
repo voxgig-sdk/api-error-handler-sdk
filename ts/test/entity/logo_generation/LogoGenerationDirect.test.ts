@@ -78,14 +78,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID': {},
     'APIERRORHANDLER_TEST_LIVE': 'FALSE',
-    'APIERRORHANDLER_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.APIERRORHANDLER_TEST_LIVE
 
   if (live) {
     const client = new ApiErrorHandlerSDK({
-      apikey: env.APIERRORHANDLER_APIKEY,
     })
 
     let idmap: any = env['APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID']
