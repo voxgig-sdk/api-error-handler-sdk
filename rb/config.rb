@@ -15,6 +15,9 @@ module ApiErrorHandlerConfig
       },
       "options" => {
         "base" => "https://abhi-api.vercel.app",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -28,19 +31,21 @@ module ApiErrorHandlerConfig
           "name" => "logo_generation",
           "op" => {
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "example" => "Hello World",
                         "kind" => "query",
                         "name" => "text",
                         "orig" => "text",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -60,11 +65,9 @@ module ApiErrorHandlerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },

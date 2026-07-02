@@ -68,12 +68,14 @@ function logo_generation_direct_setup(mockres)
   local env = runner.env_override({
     ["APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID"] = {},
     ["APIERRORHANDLER_TEST_LIVE"] = "FALSE",
+    ["APIERRORHANDLER_APIKEY"] = "NONE",
   })
 
   local live = env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["APIERRORHANDLER_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

@@ -1,39 +1,13 @@
 {
-  "name": "api-error-handler",
-  "origin": "voxgig-sdk",
   "def": "api-error-handler_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "contact": {
-          "url": "https://freepublicapis.com/api-error-handler"
-        },
-        "description": "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls. It ensures that error messages are consistent and useful for end-users and developers alike.",
-        "servers": [
-          {
-            "description": "Production server",
-            "url": "https://abhi-api.vercel.app"
-          }
-        ],
-        "title": "API Error Handler",
-        "version": "1.0.0",
-        "tagline": "Standardised error-response helpers exposed alongside Abhi API's logo generators",
-        "homepage": "https://abhi-api.vercel.app",
-        "docs_url": "https://abhi-api.vercel.app/docs",
-        "license_short": "No licence stated by the provider.",
-        "license_md": "- The provider does not publish a licence or terms-of-use page.\n- Treat the service as an undocumented free public endpoint and do not rely on it for production use.\n- Attribution to Abhi API (https://abhi-api.vercel.app) is courteous when redistributing generated assets.",
-        "about_md": "API Error Handler is part of [Abhi API](https://abhi-api.vercel.app), a free public-API collection maintained by [Abhishek Suresh](https://github.com/AbhishekSuresh2) and hosted on Vercel. The catalogue groups dozens of small endpoints (anime images, downloaders, jokes, games, search proxies, logo makers, etc.) behind a single host.\n\nThe slug specifically surfaces the logo-generation family of endpoints, which return rendered text-effect images for a supplied `text` query parameter.\n\nKnown logo endpoints under `/api/logo/`:\n\n- `/api/logo/cyberMask?text=...`\n- `/api/logo/glitch?text=...`\n- `/api/logo/gold?text=...`\n- `/api/logo/leaves?text=...`\n- `/api/logo/matrix?text=...`\n- `/api/logo/neon?text=...`\n- `/api/logo/neonDream?text=...`\n- `/api/logo/retroWave?text=...`\n- `/api/logo/shadow?text=...`\n\nOperational notes: the service is hosted on Vercel at `https://abhi-api.vercel.app`. CORS is reported as disabled on the freepublicapis.com catalogue entry, so calls are best made server-side. No authentication, rate limits, or formal SLA are documented.",
-        "entity_desc": {
-          "logo_generation": "Text-effect logo image generator endpoints under `/api/logo/{style}` (e.g. `glitch`, `neon`, `matrix`, `gold`, `cyberMask`, `leaves`, `neonDream`, `retroWave`, `shadow`), each accepting a `text` query parameter."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -42,29 +16,36 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "logo_generation": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "logo_generation",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "Hello World",
                         "kind": "query",
                         "name": "text",
                         "orig": "text",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -83,15 +64,11 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
@@ -99,9 +76,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -109,6 +83,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -117,25 +99,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -151,20 +119,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -179,28 +159,34 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicLogoGenerationFlow": {
+          "active": true,
           "entity": "logo_generation",
+          "key$": "BasicLogoGenerationFlow",
           "kind": "basic",
           "name": "BasicLogoGenerationFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "logo_generation_ref01",
                 "srcdatavar": "logo_generation_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -208,28 +194,52 @@
                     "mark": "Mark01-logo_generation_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicLogoGenerationFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "contact": {
+          "url": "https://freepublicapis.com/api-error-handler"
+        },
+        "description": "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls. It ensures that error messages are consistent and useful for end-users and developers alike.",
+        "servers": [
+          {
+            "description": "Production server",
+            "url": "https://abhi-api.vercel.app"
+          }
+        ],
+        "title": "API Error Handler",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "api-error-handler"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "api-error-handler"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -244,19 +254,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "api-error-handler"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -271,138 +281,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "api-error-handler"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "api-error-handler"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "api-error-handler"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "api-error-handler"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "api-error-handler"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "api-error-handler"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "api-error-handler"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "api-error-handler"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "api-error-handler"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "api-error-handler",
+  "origin": "voxgig-sdk"
 }

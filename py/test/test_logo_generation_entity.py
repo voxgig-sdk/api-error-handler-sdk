@@ -91,6 +91,7 @@ def _logo_generation_basic_setup(extra):
         "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID": idmap,
         "APIERRORHANDLER_TEST_LIVE": "FALSE",
         "APIERRORHANDLER_TEST_EXPLAIN": "FALSE",
+        "APIERRORHANDLER_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _logo_generation_basic_setup(extra):
     if env.get("APIERRORHANDLER_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("APIERRORHANDLER_APIKEY"),
             },
             extra or {},
         ])

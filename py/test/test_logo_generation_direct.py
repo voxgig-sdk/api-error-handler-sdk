@@ -64,12 +64,14 @@ def _logo_generation_direct_setup(mockres):
     env = runner.env_override({
         "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID": {},
         "APIERRORHANDLER_TEST_LIVE": "FALSE",
+        "APIERRORHANDLER_APIKEY": "NONE",
     })
 
     live = env.get("APIERRORHANDLER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("APIERRORHANDLER_APIKEY"),
         }
         client = ApiErrorHandlerSDK(merged_opts)
         return {

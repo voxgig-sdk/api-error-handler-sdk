@@ -85,6 +85,7 @@ function logo_generation_basic_setup($extra)
         "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => $idmap,
         "APIERRORHANDLER_TEST_LIVE" => "FALSE",
         "APIERRORHANDLER_TEST_EXPLAIN" => "FALSE",
+        "APIERRORHANDLER_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -96,6 +97,7 @@ function logo_generation_basic_setup($extra)
     if ($env["APIERRORHANDLER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["APIERRORHANDLER_APIKEY"],
             ],
             $extra ?? [],
         ]);
