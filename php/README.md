@@ -10,7 +10,7 @@ The PHP SDK for the ApiErrorHandler API — an entity-oriented client using PHP 
 
 ## Install
 ```bash
-composer require voxgig/api-error-handler-sdk
+composer require voxgig-sdk/api-error-handler
 ```
 
 

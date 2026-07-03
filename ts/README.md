@@ -10,7 +10,7 @@ The TypeScript SDK for the ApiErrorHandler API — a type-safe, entity-oriented 
 
 ## Install
 ```bash
-npm install api-error-handler
+npm install @voxgig-sdk/api-error-handler
 ```
 ## Tutorial: your first API call
 

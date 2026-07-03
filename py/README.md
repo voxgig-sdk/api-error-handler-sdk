@@ -10,7 +10,7 @@ The Python SDK for the ApiErrorHandler API — an entity-oriented client followi
 
 ## Install
 ```bash
-pip install api-error-handler-sdk
+pip install voxgig-sdk-api-error-handler
 ```
 
 Or install from source:

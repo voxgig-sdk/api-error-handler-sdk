@@ -10,13 +10,13 @@ The Ruby SDK for the ApiErrorHandler API — an entity-oriented client using idi
 
 ## Install
 ```bash
-gem install api-error-handler-sdk
+gem install voxgig-sdk-api-error-handler
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "api-error-handler-sdk"
+gem "voxgig-sdk-api-error-handler"
 ```
 
 Then run:
