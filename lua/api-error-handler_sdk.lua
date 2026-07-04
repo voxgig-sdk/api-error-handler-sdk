@@ -244,6 +244,19 @@ end
 
 
 
+-- Idiomatic facade: client:logo_generation():list() / client:logo_generation():load({ id = ... })
+function ApiErrorHandlerSDK:logo_generation(data)
+  local EntityMod = require("entity.logo_generation_entity")
+  if data == nil then
+    if self._logo_generation == nil then
+      self._logo_generation = EntityMod.new(self, nil)
+    end
+    return self._logo_generation
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:logo_generation() instead.
 function ApiErrorHandlerSDK:LogoGeneration(data)
   local EntityMod = require("entity.logo_generation_entity")
   return EntityMod.new(self, data)

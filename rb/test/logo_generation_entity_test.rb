@@ -42,8 +42,7 @@ class LogoGenerationEntityTest < Minitest::Test
     # LOAD
     logo_generation_ref01_ent = client.LogoGeneration(nil)
     logo_generation_ref01_match_dt0 = {}
-    logo_generation_ref01_data_dt0_loaded, err = logo_generation_ref01_ent.load(logo_generation_ref01_match_dt0, nil)
-    assert_nil err
+    logo_generation_ref01_data_dt0_loaded = logo_generation_ref01_ent.load(logo_generation_ref01_match_dt0, nil)
     assert !logo_generation_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def logo_generation_basic_setup(extra)
     "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => idmap,
     "APIERRORHANDLER_TEST_LIVE" => "FALSE",
     "APIERRORHANDLER_TEST_EXPLAIN" => "FALSE",
-    "APIERRORHANDLER_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def logo_generation_basic_setup(extra)
   if env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["APIERRORHANDLER_APIKEY"],
       },
       extra || {},
     ])

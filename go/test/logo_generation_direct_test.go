@@ -105,14 +105,12 @@ func logo_generationDirectSetup(mockres any) *logo_generationDirectSetupResult {
 	env := envOverride(map[string]any{
 		"APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID": map[string]any{},
 		"APIERRORHANDLER_TEST_LIVE":    "FALSE",
-		"APIERRORHANDLER_APIKEY":       "NONE",
 	})
 
 	live := env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["APIERRORHANDLER_APIKEY"],
 		}
 		client := sdk.NewApiErrorHandlerSDK(mergedOpts)
 

@@ -245,6 +245,9 @@ func (sdk *ApiErrorHandlerSDK) Direct(fetchargs map[string]any) (map[string]any,
 }
 
 
+// LogoGeneration returns a LogoGeneration entity bound to this client.
+// Idiomatic usage: client.LogoGeneration(nil).List(nil, nil) or
+// client.LogoGeneration(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ApiErrorHandlerSDK) LogoGeneration(data map[string]any) ApiErrorHandlerEntity {
 	return NewLogoGenerationEntityFunc(sdk, data)
 }
