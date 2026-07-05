@@ -16,7 +16,6 @@ go build -o api-error-handler-cli ./...
 
 ```sh
 # One-shot: arguments form a single AQL expression
-./api-error-handler-cli list logo_generation
 ./api-error-handler-cli load 1 logo_generation
 ./api-error-handler-cli load '{id:1}' logo_generation
 
@@ -28,9 +27,7 @@ go build -o api-error-handler-cli ./...
 
 | Word     | Signatures                                   | Description                |
 |----------|----------------------------------------------|----------------------------|
-| `list`   | `[entity]` · `[query entity]`                | List records               |
 | `load`   | `[entity]` · `[query entity]`                | Load a single record       |
-| `update` | `[entity]` · `[query entity]`                | Update a record            |
 
 `query` is either a Map (`{id:1}`) or a Scalar (`1`, treated as `{id:1}`).
 `entity` is one of the SDK's entity names (auto-quoted as an atom).
