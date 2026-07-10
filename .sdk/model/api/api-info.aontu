@@ -15,9 +15,9 @@ main: {
           url: "https://abhi-api.vercel.app"
         }
       ]
+      summary: "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls."
       title: "API Error Handler"
       version: "1.0.0"
+      website: "https://abhi-api.vercel.app"
     }
   }
-}
-

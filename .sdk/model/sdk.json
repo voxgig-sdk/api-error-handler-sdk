@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -205,14 +202,17 @@
           "url": "https://freepublicapis.com/api-error-handler"
         },
         "description": "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls. It ensures that error messages are consistent and useful for end-users and developers alike.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://abhi-api.vercel.app"
           }
         ],
+        "summary": "This API is designed to manage and provide standardized responses for different error scenarios encountered during API calls.",
         "title": "API Error Handler",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://abhi-api.vercel.app"
       },
       "option": {},
       "target": {
@@ -265,6 +265,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -315,6 +318,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
