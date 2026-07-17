@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ApiErrorHandler SDK exists test
 
 local sdk = require("api-error-handler_sdk")
 
