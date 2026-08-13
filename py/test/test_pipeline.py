@@ -16,11 +16,11 @@
 import pytest
 
 from apierrorhandler_sdk import ApiErrorHandlerSDK
-from core.error import ApiErrorHandlerError
-from core.result import ApiErrorHandlerResult
-from core.response import ApiErrorHandlerResponse
-from core.spec import ApiErrorHandlerSpec
-from feature.base_feature import ApiErrorHandlerBaseFeature
+from apierrorhandler_sdk.core.error import ApiErrorHandlerError
+from apierrorhandler_sdk.core.result import ApiErrorHandlerResult
+from apierrorhandler_sdk.core.response import ApiErrorHandlerResponse
+from apierrorhandler_sdk.core.spec import ApiErrorHandlerSpec
+from apierrorhandler_sdk.feature.base_feature import ApiErrorHandlerBaseFeature
 
 
 def _client():

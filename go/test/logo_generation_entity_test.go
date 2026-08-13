@@ -44,7 +44,7 @@ func TestLogoGenerationEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -110,21 +110,21 @@ func logo_generationBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID")
+	entidEnvRaw := os.Getenv("API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID": idmap,
-		"APIERRORHANDLER_TEST_LIVE":      "FALSE",
-		"APIERRORHANDLER_TEST_EXPLAIN":   "FALSE",
+		"API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID": idmap,
+		"API_ERROR_HANDLER_TEST_LIVE":      "FALSE",
+		"API_ERROR_HANDLER_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID"])
+	idmapResolved := core.ToMapAny(env["API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["APIERRORHANDLER_TEST_LIVE"] == "TRUE" {
+	if env["API_ERROR_HANDLER_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -133,13 +133,13 @@ func logo_generationBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewApiErrorHandlerSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
+	live := env["API_ERROR_HANDLER_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["APIERRORHANDLER_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["API_ERROR_HANDLER_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

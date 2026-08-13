@@ -23,8 +23,8 @@ module ApiErrorHandlerTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("APIERRORHANDLER_TEST_LIVE")
-    override = getenv("APIERRORHANDLER_TEST_OVERRIDE")
+    live = getenv("API_ERROR_HANDLER_TEST_LIVE")
+    override = getenv("API_ERROR_HANDLER_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module ApiErrorHandlerTestRunner
       end
     end
 
-    explain = getenv("APIERRORHANDLER_TEST_EXPLAIN")
-    m["APIERRORHANDLER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("API_ERROR_HANDLER_TEST_EXPLAIN")
+    m["API_ERROR_HANDLER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

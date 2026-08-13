@@ -33,7 +33,7 @@ class LogoGenerationEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -77,22 +77,22 @@ function logo_generation_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID");
+    $entid_env_raw = getenv("API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => $idmap,
-        "APIERRORHANDLER_TEST_LIVE" => "FALSE",
-        "APIERRORHANDLER_TEST_EXPLAIN" => "FALSE",
+        "API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID" => $idmap,
+        "API_ERROR_HANDLER_TEST_LIVE" => "FALSE",
+        "API_ERROR_HANDLER_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID"]);
+        $env["API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["APIERRORHANDLER_TEST_LIVE"] === "TRUE") {
+    if ($env["API_ERROR_HANDLER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -101,13 +101,13 @@ function logo_generation_basic_setup($extra)
         $client = new ApiErrorHandlerSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["APIERRORHANDLER_TEST_LIVE"] === "TRUE";
+    $live = $env["API_ERROR_HANDLER_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["APIERRORHANDLER_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["API_ERROR_HANDLER_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

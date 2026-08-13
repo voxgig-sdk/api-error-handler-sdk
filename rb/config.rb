@@ -46,6 +46,7 @@ module ApiErrorHandlerConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/logo/glitch",
                   "parts" => [

@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ApiErrorHandlerUtility::setRegistrar(function (ApiErrorHandlerUtility $u): void 
     $u->prepare_params = [ApiErrorHandlerPrepareParams::class, 'call'];
     $u->prepare_path = [ApiErrorHandlerPreparePath::class, 'call'];
     $u->prepare_query = [ApiErrorHandlerPrepareQuery::class, 'call'];
+    $u->graphql_body = [ApiErrorHandlerGraphql::class, 'body'];
+    $u->graphql_errors = [ApiErrorHandlerGraphql::class, 'errors'];
     $u->result_basic = [ApiErrorHandlerResultBasic::class, 'call'];
     $u->result_body = [ApiErrorHandlerResultBody::class, 'call'];
     $u->result_headers = [ApiErrorHandlerResultHeaders::class, 'call'];

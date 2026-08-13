@@ -26,7 +26,7 @@ class LogoGenerationEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -74,22 +74,22 @@ def logo_generation_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID"]
+  entid_env_raw = ENV["API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => idmap,
-    "APIERRORHANDLER_TEST_LIVE" => "FALSE",
-    "APIERRORHANDLER_TEST_EXPLAIN" => "FALSE",
+    "API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID" => idmap,
+    "API_ERROR_HANDLER_TEST_LIVE" => "FALSE",
+    "API_ERROR_HANDLER_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID"])
+    env["API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
+  if env["API_ERROR_HANDLER_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -98,13 +98,13 @@ def logo_generation_basic_setup(extra)
     client = ApiErrorHandlerSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["APIERRORHANDLER_TEST_LIVE"] == "TRUE"
+  live = env["API_ERROR_HANDLER_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["APIERRORHANDLER_TEST_EXPLAIN"] == "TRUE",
+    explain: env["API_ERROR_HANDLER_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

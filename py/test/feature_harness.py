@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ApiErrorHandlerControl
-from core.error import ApiErrorHandlerError
-from core.result import ApiErrorHandlerResult
-from core.spec import ApiErrorHandlerSpec
+from apierrorhandler_sdk.config import make_config
+from apierrorhandler_sdk.features import _make_feature
+from apierrorhandler_sdk.core.control import ApiErrorHandlerControl
+from apierrorhandler_sdk.core.error import ApiErrorHandlerError
+from apierrorhandler_sdk.core.result import ApiErrorHandlerResult
+from apierrorhandler_sdk.core.spec import ApiErrorHandlerSpec
 
 
 # True when this SDK was generated with the named feature.

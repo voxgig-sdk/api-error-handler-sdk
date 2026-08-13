@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ApiErrorHandler SDK exists test
 
 import pytest
 from apierrorhandler_sdk import ApiErrorHandlerSDK

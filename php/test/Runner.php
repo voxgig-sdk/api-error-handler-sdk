@@ -43,8 +43,8 @@ class ApiErrorHandlerTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('APIERRORHANDLER_TEST_LIVE');
-        $override = self::getenv('APIERRORHANDLER_TEST_OVERRIDE');
+        $live = self::getenv('API_ERROR_HANDLER_TEST_LIVE');
+        $override = self::getenv('API_ERROR_HANDLER_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ApiErrorHandlerTestRunner
             }
         }
 
-        $explain = self::getenv('APIERRORHANDLER_TEST_EXPLAIN');
+        $explain = self::getenv('API_ERROR_HANDLER_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['APIERRORHANDLER_TEST_EXPLAIN'] = $explain;
+            $m['API_ERROR_HANDLER_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

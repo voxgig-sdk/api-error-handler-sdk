@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from apierrorhandler_sdk.utility.voxgig_struct import voxgig_struct as vs
 from apierrorhandler_sdk import ApiErrorHandlerSDK
-from core import helpers
+from apierrorhandler_sdk.core import helpers
 from test import runner
 
 
@@ -61,11 +61,11 @@ def _logo_generation_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID": {},
-        "APIERRORHANDLER_TEST_LIVE": "FALSE",
+        "API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID": {},
+        "API_ERROR_HANDLER_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("APIERRORHANDLER_TEST_LIVE") == "TRUE"
+    live = env.get("API_ERROR_HANDLER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

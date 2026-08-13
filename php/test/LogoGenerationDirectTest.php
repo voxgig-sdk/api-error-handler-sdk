@@ -71,11 +71,11 @@ function logo_generation_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "APIERRORHANDLER_TEST_LOGO_GENERATION_ENTID" => [],
-        "APIERRORHANDLER_TEST_LIVE" => "FALSE",
+        "API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID" => [],
+        "API_ERROR_HANDLER_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["APIERRORHANDLER_TEST_LIVE"] === "TRUE";
+    $live = $env["API_ERROR_HANDLER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
