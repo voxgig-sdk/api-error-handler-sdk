@@ -28,7 +28,7 @@ class ApiErrorHandlerSDK
     utility = ApiErrorHandlerUtility.new
     @_utility = utility
 
-    config = ApiErrorHandlerConfig.make_config
+    config = ApiErrorHandlerConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

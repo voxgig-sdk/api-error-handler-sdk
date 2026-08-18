@@ -40,7 +40,7 @@ class ApiErrorHandlerSDK
         $utility = new ApiErrorHandlerUtility();
         $this->_utility = $utility;
 
-        $config = ApiErrorHandlerConfig::make_config();
+        $config = ApiErrorHandlerConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

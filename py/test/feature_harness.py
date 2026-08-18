@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from apierrorhandler_sdk.config import make_config
+from apierrorhandler_sdk.config import shared_config
 from apierrorhandler_sdk.features import _make_feature
 from apierrorhandler_sdk.core.control import ApiErrorHandlerControl
 from apierrorhandler_sdk.core.error import ApiErrorHandlerError
@@ -24,7 +24,7 @@ from apierrorhandler_sdk.core.spec import ApiErrorHandlerSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 
