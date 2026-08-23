@@ -19,6 +19,9 @@ module ApiErrorHandlerConfig
     {
       "main" => {
         "name" => "ApiErrorHandler",
+        "slug" => "api-error-handler",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
