@@ -79,10 +79,16 @@ class ApiErrorHandlerConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/logo/glitch',
-                  'parts' => [
-                    'api',
-                    'logo',
-                    'glitch',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'logo',
+                    ],
+                    [
+                      'lit' => 'glitch',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -92,6 +98,11 @@ class ApiErrorHandlerConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'logo',
+                    'glitch',
                   ],
                 ],
               ],

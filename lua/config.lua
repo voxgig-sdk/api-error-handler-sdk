@@ -53,10 +53,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/logo/glitch",
-                ["parts"] = {
-                  "api",
-                  "logo",
-                  "glitch",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "logo",
+                  },
+                  {
+                    ["lit"] = "glitch",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -66,6 +72,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "logo",
+                  "glitch",
                 },
               },
             },

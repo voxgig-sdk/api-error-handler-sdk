@@ -65,10 +65,16 @@ module ApiErrorHandlerConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/logo/glitch",
-                  "parts" => [
-                    "api",
-                    "logo",
-                    "glitch",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "logo",
+                    },
+                    {
+                      "lit" => "glitch",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -79,6 +85,11 @@ module ApiErrorHandlerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "logo",
+                    "glitch",
+                  ],
                 },
               ],
             },
