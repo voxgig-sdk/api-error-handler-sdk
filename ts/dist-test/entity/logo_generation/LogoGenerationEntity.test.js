@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.API_ERROR_HANDLER_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'logo_generation.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'logo_generation.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [], "name": "logo_generation", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "query": [{ "active": true, "example": "Hello World", "kind": "query", "name": "text", "orig": "text", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "GET /api/logo/glitch", "json": "{\"operationId\":\"getGlitchLogo\",\"parameters\":[{\"description\":\"Text to be displayed in the glitch logo\",\"example\":\"Hello World\",\"in\":\"query\",\"name\":\"text\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"image/jpeg\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}},\"image/png\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"Successful response with generated logo\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Bad Request\",\"message\":\"The 'text' parameter is required and cannot be empty\",\"status\":400},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type or name\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error message explaining what went wrong\",\"type\":\"string\"},\"path\":{\"description\":\"API endpoint path where the error occurred\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"timestamp\":{\"description\":\"Timestamp when the error occurred\",\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"error\",\"message\",\"status\"],\"type\":\"object\"}}},\"description\":\"Bad Request - Invalid or missing text parameter\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Not Found\",\"message\":\"The requested resource could not be found\",\"status\":404},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type or name\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error message explaining what went wrong\",\"type\":\"string\"},\"path\":{\"description\":\"API endpoint path where the error occurred\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"timestamp\":{\"description\":\"Timestamp when the error occurred\",\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"error\",\"message\",\"status\"],\"type\":\"object\"}}},\"description\":\"Not Found - Resource not found\"},\"500\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Internal Server Error\",\"message\":\"An unexpected error occurred while processing your request\",\"status\":500},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type or name\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error message explaining what went wrong\",\"type\":\"string\"},\"path\":{\"description\":\"API endpoint path where the error occurred\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"timestamp\":{\"description\":\"Timestamp when the error occurred\",\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"error\",\"message\",\"status\"],\"type\":\"object\"}}},\"description\":\"Internal Server Error\"},\"503\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Service Unavailable\",\"message\":\"The service is temporarily unavailable. Please try again later\",\"status\":503},\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type or name\",\"type\":\"string\"},\"message\":{\"description\":\"Detailed error message explaining what went wrong\",\"type\":\"string\"},\"path\":{\"description\":\"API endpoint path where the error occurred\",\"type\":\"string\"},\"status\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"timestamp\":{\"description\":\"Timestamp when the error occurred\",\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"error\",\"message\",\"status\"],\"type\":\"object\"}}},\"description\":\"Service Unavailable\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/logo/glitch", "segments": [{ "lit": "api" }, { "lit": "logo" }, { "lit": "glitch" }], "select": { "exist": ["text"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "logo_generation", "name__orig": "logo_generation", "Name": "LogoGeneration", "name_": "logo_generation", "name-": "logo-generation", "NAME": "LOGO_GENERATION", "index$": 0 }, { "active": true, "entity": "logo_generation", "key$": "BasicLogoGenerationFlow", "kind": "basic", "name": "BasicLogoGenerationFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "logo_generation_ref01", "srcdatavar": "logo_generation_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-logo_generation_ref01" } }], "index$": 0 }] }, 'LogoGeneration');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID': idmap,
         'API_ERROR_HANDLER_TEST_LIVE': 'FALSE',
@@ -115,7 +107,13 @@ function basicSetup(extra) {
     });
     idmap = env['API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID'];
     const live = 'TRUE' === env.API_ERROR_HANDLER_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['API_ERROR_HANDLER_TEST_LOGO_GENERATION_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.ApiErrorHandlerSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -126,7 +124,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -138,7 +137,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.API_ERROR_HANDLER_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

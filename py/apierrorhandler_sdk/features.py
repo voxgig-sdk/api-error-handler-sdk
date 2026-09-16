@@ -1,12 +1,18 @@
 # ApiErrorHandler SDK feature factory
 
 from apierrorhandler_sdk.feature.base_feature import ApiErrorHandlerBaseFeature
+from apierrorhandler_sdk.feature.ratelimit_feature import ApiErrorHandlerRatelimitFeature
+from apierrorhandler_sdk.feature.retry_feature import ApiErrorHandlerRetryFeature
 from apierrorhandler_sdk.feature.test_feature import ApiErrorHandlerTestFeature
+from apierrorhandler_sdk.feature.timeout_feature import ApiErrorHandlerTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ApiErrorHandlerBaseFeature(),
+    "ratelimit": lambda: ApiErrorHandlerRatelimitFeature(),
+    "retry": lambda: ApiErrorHandlerRetryFeature(),
     "test": lambda: ApiErrorHandlerTestFeature(),
+    "timeout": lambda: ApiErrorHandlerTimeoutFeature(),
 }
 
 

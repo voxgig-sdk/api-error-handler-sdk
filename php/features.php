@@ -4,7 +4,10 @@ declare(strict_types=1);
 // ApiErrorHandler SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class ApiErrorHandlerFeatures
@@ -14,8 +17,14 @@ class ApiErrorHandlerFeatures
         switch ($name) {
             case "base":
                 return new ApiErrorHandlerBaseFeature();
+            case "ratelimit":
+                return new ApiErrorHandlerRatelimitFeature();
+            case "retry":
+                return new ApiErrorHandlerRetryFeature();
             case "test":
                 return new ApiErrorHandlerTestFeature();
+            case "timeout":
+                return new ApiErrorHandlerTimeoutFeature();
             default:
                 return new ApiErrorHandlerBaseFeature();
         }
@@ -31,7 +40,10 @@ class ApiErrorHandlerFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

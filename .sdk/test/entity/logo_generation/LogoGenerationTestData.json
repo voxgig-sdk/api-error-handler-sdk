@@ -16,5 +16,218 @@
     "logo_generation": {
       "logo_generation_ref01": {}
     }
+  },
+  "requests": {
+    "GET /api/logo/glitch": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getGlitchLogo",
+        "parameters": [
+          {
+            "description": "Text to be displayed in the glitch logo",
+            "example": "Hello World",
+            "in": "query",
+            "name": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful response with generated logo"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Bad Request",
+                  "message": "The 'text' parameter is required and cannot be empty",
+                  "status": 400
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error type or name",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error message explaining what went wrong",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "API endpoint path where the error occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "HTTP status code",
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp when the error occurred",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "message",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request - Invalid or missing text parameter"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Not Found",
+                  "message": "The requested resource could not be found",
+                  "status": 404
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error type or name",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error message explaining what went wrong",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "API endpoint path where the error occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "HTTP status code",
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp when the error occurred",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "message",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found - Resource not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal Server Error",
+                  "message": "An unexpected error occurred while processing your request",
+                  "status": 500
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error type or name",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error message explaining what went wrong",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "API endpoint path where the error occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "HTTP status code",
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp when the error occurred",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "message",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Service Unavailable",
+                  "message": "The service is temporarily unavailable. Please try again later",
+                  "status": 503
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Error type or name",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Detailed error message explaining what went wrong",
+                      "type": "string"
+                    },
+                    "path": {
+                      "description": "API endpoint path where the error occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "HTTP status code",
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "description": "Timestamp when the error occurred",
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "message",
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }
