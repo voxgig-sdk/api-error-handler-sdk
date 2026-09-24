@@ -1,0 +1,62 @@
+# Entity: logo_generation
+
+main: kit: entity: logo_generation: {
+
+  alias: field: {}
+
+  name: "logo_generation"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/logo/glitch"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "Hello World"
+                k: "query"
+                n: "text"
+                or: "text"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/logo/glitch"
+          q: {
+            exist: [
+              "text"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "logo"
+            }
+            {
+              lit: "glitch"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

@@ -96,18 +96,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "Hello World",
-											"kind": "query",
-											"name": "text",
-											"orig": "text",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/logo/glitch",
@@ -122,19 +110,32 @@ func MakeConfig() map[string]any {
 										"lit": "glitch",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"text",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"api",
 									"logo",
 									"glitch",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "text",
+											"orig": "text",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "Hello World",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"text",
+									},
 								},
 							},
 						},

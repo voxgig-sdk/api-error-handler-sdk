@@ -92,18 +92,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = "Hello World",
-                      ["kind"] = "query",
-                      ["name"] = "text",
-                      ["orig"] = "text",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/logo/glitch",
@@ -118,19 +106,32 @@ local function make_config()
                     ["lit"] = "glitch",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "text",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "logo",
                   "glitch",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "text",
+                      ["orig"] = "text",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "Hello World",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "text",
+                  },
                 },
               },
             },
