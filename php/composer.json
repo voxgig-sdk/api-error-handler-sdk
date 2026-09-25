@@ -1,5 +1,5 @@
 {
-  "name": "voxgig-sdk/api-error-handler",
+  "name": "voxgig-sdk/api-error-handler-sdk",
   "description": "Unofficial generated PHP SDK for the API Error Handler public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
   "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "api-error-handler"],
