@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 ApiErrorHandlerUtility.registrar = ->(u) {
   u.clean = ApiErrorHandlerUtilities::Clean
+  u.clean_add = ApiErrorHandlerUtilities::CleanAdd
+  u.clean_explain = ApiErrorHandlerUtilities::CleanExplain
   u.done = ApiErrorHandlerUtilities::Done
   u.make_error = ApiErrorHandlerUtilities::MakeError
   u.feature_add = ApiErrorHandlerUtilities::FeatureAdd

@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 ApiErrorHandlerUtility::setRegistrar(function (ApiErrorHandlerUtility $u): void {
     $u->clean = [ApiErrorHandlerClean::class, 'call'];
+    $u->clean_add = [ApiErrorHandlerClean::class, 'add'];
+    $u->clean_explain = [ApiErrorHandlerDone::class, 'clean_explain'];
     $u->done = [ApiErrorHandlerDone::class, 'call'];
     $u->make_error = [ApiErrorHandlerMakeError::class, 'call'];
     $u->feature_add = [ApiErrorHandlerFeatureAdd::class, 'call'];
