@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -132,6 +133,18 @@ local function make_config()
                   ["exist"] = {
                     "text",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "image/png",
+                    },
+                  },
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "image/jpeg",
                 },
               },
             },

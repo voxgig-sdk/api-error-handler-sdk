@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -152,6 +153,18 @@ class Config {
                                 "exist": [
                                     "text"
                                 ]
+                            },
+                            "response": {
+                                "alternatives": [
+                                    {
+                                        "binary": true,
+                                        "kind": "raw",
+                                        "media": "image/png"
+                                    }
+                                ],
+                                "binary": true,
+                                "kind": "raw",
+                                "media": "image/jpeg"
                             }
                         }
                     ]

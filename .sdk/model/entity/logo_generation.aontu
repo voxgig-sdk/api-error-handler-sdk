@@ -34,6 +34,18 @@ main: kit: entity: logo_generation: {
               "text"
             ]
           }
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "image/png"
+              }
+            ]
+            binary: true
+            kind: "raw"
+            media: "image/jpeg"
+          }
           s: [
             {
               lit: "api"

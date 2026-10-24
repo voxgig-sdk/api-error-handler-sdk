@@ -19,8 +19,19 @@ const PLAN: any[] = [
       "text": "Hello World"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "image/png",
+      "image/jpeg"
+    ],
     "query": [
       "text"
+    ],
+    "queryArgs": [
+      {
+        "name": "text",
+        "wire": "text"
+      }
     ],
     "auth": null,
     "status": 200,

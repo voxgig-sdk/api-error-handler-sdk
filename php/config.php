@@ -93,6 +93,7 @@ class ApiErrorHandlerConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -158,6 +159,18 @@ class ApiErrorHandlerConfig
                     'exist' => [
                       'text',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'binary' => true,
+                        'kind' => 'raw',
+                        'media' => 'image/png',
+                      ],
+                    ],
+                    'binary' => true,
+                    'kind' => 'raw',
+                    'media' => 'image/jpeg',
                   ],
                 ],
               ],

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { ApiErrorHandlerSDK, BaseFeature, stdutil } from '../../..'
+import { ApiErrorHandlerSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('LogoGenerationEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = ApiErrorHandlerSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.LogoGeneration().load({"text":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.API_ERROR_HANDLER_TEST_LIVE
@@ -51,7 +63,7 @@ describe('LogoGenerationEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"logo_generation","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/logo/glitch","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"Hello World","k":"query","n":"text","or":"text","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/logo/glitch","q":{"exist":["text"]},"r":{},"s":[{"lit":"api"},{"lit":"logo"},{"lit":"glitch"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"logo_generation","name__orig":"logo_generation","Name":"LogoGeneration","name_":"logo_generation","name-":"logo-generation","NAME":"LOGO_GENERATION","index$":0}, {"active":true,"entity":"logo_generation","key$":"BasicLogoGenerationFlow","kind":"basic","name":"BasicLogoGenerationFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"logo_generation_ref01","srcdatavar":"logo_generation_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-logo_generation_ref01"}}],"index$":0}]}, 'LogoGeneration', {"GET /api/logo/glitch":{"protocol":"http","parameters":[{"name":"text","in":"query","description":"Text to be displayed in the glitch logo","required":true,"schema":{"type":"string"},"example":"Hello World","index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"logo_generation","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/logo/glitch","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"Hello World","k":"query","n":"text","or":"text","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/logo/glitch","q":{"exist":["text"]},"r":{},"rs":{"alternatives":[{"binary":true,"kind":"raw","media":"image/png"}],"binary":true,"kind":"raw","media":"image/jpeg"},"s":[{"lit":"api"},{"lit":"logo"},{"lit":"glitch"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"logo_generation","name__orig":"logo_generation","Name":"LogoGeneration","name_":"logo_generation","name-":"logo-generation","NAME":"LOGO_GENERATION","index$":0}, {"active":true,"entity":"logo_generation","key$":"BasicLogoGenerationFlow","kind":"basic","name":"BasicLogoGenerationFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"logo_generation_ref01","srcdatavar":"logo_generation_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-logo_generation_ref01"}}],"index$":0}]}, 'LogoGeneration', {"GET /api/logo/glitch":{"protocol":"http","parameters":[{"name":"text","in":"query","description":"Text to be displayed in the glitch logo","required":true,"schema":{"type":"string"},"example":"Hello World","index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('LogoGenerationEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options
